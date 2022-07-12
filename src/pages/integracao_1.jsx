@@ -6,11 +6,18 @@ export default function Integracao() {
     const [client, setClient] = useState({});
     const [codigo, setCodigo] = useState(1);
     
-    function obterCliente() {
-        fetch(`http://localhost:3000/api/clientes/${codigo}`)
-        .then(resp => resp.json())
-        .then(data => setClient(data));
+    // function obterCliente() {
+    //     fetch(`http://localhost:3000/api/clientes/${codigo}`)
+    //         .then(resp => resp.json())
+    //         .then(data => setClient(data));
+    // }   ----------> versao com promise   <------------
+
+    async function obterCliente() {
+        const resp = await fetch(`http://localhost:3000/api/clientes/${codigo}`);
+        const data = await resp.json();    
+        setClient(data);
     }
+    // ---------> versao com async await <-------------
     
     return (
         <Layout >
